@@ -1,4 +1,5 @@
 import sys
+from copy import deepcopy
 input = sys.stdin.readline
 
 arr = [[None]*4 for _ in range(4)]
@@ -35,12 +36,12 @@ def move_fish(arr,fish_idx, shark_x, shark_y):
             arr[x][y][1]=direction
             arr[x][y], arr[nx][ny]= arr[nx][ny],arr[x][y]
             fish_idx[i], fish_idx[arr[nx][ny][0]-1] = (nx,ny),(x,y)
-            
             break
 
 def eat_fish(arr,fish_idx,shark_x,shark_y,total):
     global result
-    
+    arr = deepcopy(arr)
+
     total += arr[shark_x][shark_y][0]
     
     fish_idx[arr[shark_x][shark_y][0]]=None
@@ -63,6 +64,7 @@ def eat_fish(arr,fish_idx,shark_x,shark_y,total):
         result = max(result, total)
         return 
     
+
     for i,j in p_move:
         eat_fish(arr,fish_idx,i,j)
         
