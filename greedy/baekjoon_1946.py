@@ -1,4 +1,9 @@
 # 신입사원
+# 57384KB,	3772ms
+
+import sys
+
+input = sys.stdin.readline
 
 t=int(input())
 for _ in range(t):
