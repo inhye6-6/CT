@@ -1,3 +1,5 @@
+# 카드 합체 놀이 
+# 30864KB, 208 ms
 import sys
 
 input = sys.stdin.readline
