@@ -1,29 +1,28 @@
+# 바이러스
+# 30860KB, 68ms
+	
 import sys
 input = sys.stdin.readline
 
 n=int(input())
 m=int(input())
 graph=[[0]*n for _ in range(n)]
+visited=[0]*n
 
-def dfs(x,y) :
-    if x<0 or x>=n-1 or y>0 or y>=n-1: 
-       return False
-    if graph[i][j]==1:
-        graph[i][j]=0
-        dfs(j,i)
-        return True
-    return False  
-    
 for _ in range(m) :
     x,y=map(int,input().split())
-    graph[x-1][y-1]=1
+    graph[x-1].append(y-1)
+    graph[y-1].append(x-1)
+    
+count=0
 
-
-count=1
-
-for i in range(n):
-    for j in range(n):
-        if dfs(i,j):
+def dfs(i):
+    global count
+    visited[i]=1
+    for node in graph[i] :
+        if visited[node]== 0:
+            dfs(node)
             count+=1
-
+    
+dfs(0)    
 print(count)
