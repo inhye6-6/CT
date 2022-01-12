@@ -6,7 +6,7 @@ input = sys.stdin.readline
 
 n=int(input())
 m=int(input())
-graph=[[0]*n for _ in range(n)]
+graph=[[]*n for _ in range(n)]
 visited=[0]*n
 
 for _ in range(m) :
