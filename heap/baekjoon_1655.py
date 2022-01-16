@@ -1,3 +1,5 @@
+# 가운데 수 찾기
+# 44044KB, 368ms
 import sys
 import heapq
 input = sys.stdin.readline
