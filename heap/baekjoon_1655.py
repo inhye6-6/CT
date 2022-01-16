@@ -1,5 +1,5 @@
 # 가운데 수 찾기
-# 44044KB, 368ms
+# 36872KB, 288ms
 import sys
 import heapq
 input = sys.stdin.readline
@@ -11,13 +11,13 @@ max_heap=[]
 for i in range(n) :
     k=int(input())
     if len(min_heap)==len(max_heap) :
-        heapq.heappush(max_heap,(-k,k))
-    else : heapq.heappush(min_heap,(k,k))
+        heapq.heappush(max_heap,-k)
+    else : heapq.heappush(min_heap,k)
 
-    if min_heap and min_heap[0][1] < max_heap[0][1] :
-        tmp_min = heapq.heappop(max_heap)[1]
-        tmp_max = heapq.heappop(min_heap)[1]
-        heapq.heappush(min_heap,(tmp_min,tmp_min))
-        heapq.heappush(max_heap,(-tmp_max,tmp_max))
+    if min_heap and min_heap[0] < -max_heap[0] :
+        tmp_min = -heapq.heappop(max_heap)
+        tmp_max = -heapq.heappop(min_heap)
+        heapq.heappush(min_heap,tmp_min)
+        heapq.heappush(max_heap,tmp_max)
 
-    print(max_heap[0][1])
+    print(-max_heap[0])
