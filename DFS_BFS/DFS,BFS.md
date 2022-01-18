@@ -58,6 +58,8 @@ def bfs(x,y):
                 queue.append((nx,ny))
                 visited[nx][ny] = 1 
 ```
+<br>
+
 ___
 ## 1. 토마토 (baekjoon 7576) 
 *푼 날짜 : 2022.01.19*
