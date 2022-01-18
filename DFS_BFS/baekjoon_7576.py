@@ -2,7 +2,6 @@
 
 import sys 
 from collections import deque
-from tkinter import W
 input = sys.stdin.readline
 
 m, n = map(int,input().split())
@@ -46,11 +45,9 @@ def bfs():
                 queue.append((nx,ny))
                 visited[nx][ny] = 1
                 storage[nx][ny] = storage[x][y] + 1
-                day = max(day,storage[nx][ny])
+                day = max(day,storage[nx][ny]-1)
                 count -= 1
-    
     return day
-
 
 if count == 0:
     print('0')
