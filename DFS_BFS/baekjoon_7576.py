@@ -8,6 +8,7 @@ input = sys.stdin.readline
 m, n = map(int,input().split())
 storage=[]
 queue = deque()
+count = 0
 
 for i in range(n) : 
     row=list(map(int,input().split()))
@@ -17,44 +18,45 @@ for i in range(n) :
     for j, tomato in enumerate(row):
         if tomato == 1 :
             queue.append((i,j))
+            continue
+        if tomato == 0 :
+            count += 1
 
 visited = [[0]*m for _ in range(n)]
-count = 1
 
 
 def bfs():
     global count
+    day = 0
     dx = [1,-1,0,0]
     dy = [0,0,-1,1]
+
     while queue :
         x,y = queue.popleft()
+
         visited[x][y]= 1
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
             
-            if nx<0 or nx >= m or ny <0 or ny>= n :
-                continue
-            
-            # 토마토가 없을 때 무시
-            if storage[nx][ny] == -1 :
+            if nx<0 or nx >= n or ny <0 or ny>= m :
                 continue
 
             if visited[nx][ny] != 1 and storage[nx][ny] == 0 :
                 queue.append((nx,ny))
                 visited[nx][ny] = 1
-                storage[nx][ny] += 1
-                count = max(count,storage[nx][ny])
+                storage[nx][ny] = storage[x][y] + 1
+                day = max(day,storage[nx][ny])
+                count -= 1
+    
+    return day
 
-if all(storage):
+
+if count == 0:
     print('0')
-
-bfs()
-
-if not all(storage) : 
+else :
+    day = bfs()
+    if count > 0 : 
         print('-1')
                 
-print(count)
-
-
-
+    else : print(day)
