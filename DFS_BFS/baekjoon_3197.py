@@ -1,12 +1,14 @@
 # 백조의 호수
  
-# dfs TLE
-
+from collections import deque
 
 r,c = map(int, input().split())
 lake = []
 swan = [] # 위치
 count = 0
+
+lake_queue=deque()
+
 for i in range(r):
     lst = list(input())
     lake.append(lst)
