@@ -35,3 +35,29 @@ FROM(
     GROUP BY A.NAME) AS B
 WHERE B.COUNT >1
 ORDER BY 1
+
+
+
+/*
+mysql 날짜 관련 함수 
+
+1) dayofweek(date) : 날짜를 한 주의 몇 번째 요일인지를 나타내는 숫자로 리턴
+(1 = 일요일, 2 = 월요일, ... 7 = 토요일)
+
+2) weekday(date) : (0 = 월요일, ... 6 = 일요일)
+
+# 나중에 다시정리 
+
+hour(time) : 시간을 알려줌 (0~23)
+*/
+
+-- 입양시각 구하기(1)
+
+SELECT A.HOUR , COUNT(A.HOUR) COUNT
+FROM (
+    SELECT hour(B.DATETIME) HOUR
+    FROM ANIMAL_OUTS AS B
+    WHERE hour(B.DATETIME) >= 9 AND hour(B.DATETIME) < 20
+) AS A
+GROUP BY 1
+ORDER BY 1
