@@ -126,3 +126,10 @@ SELECT  animal_outs.animal_id, animal_outs.name
 from animal_outs left join animal_ins
 on animal_ins.animal_id = animal_outs.animal_id
 where  animal_ins.animal_id is null
+
+-- 보호시작일이 입양일보다 늦은 경우 
+select a.animal_id, a.name
+from animal_ins as a left join animal_outs as b
+on a.animal_id=b.animal_id
+where a.datetime>b.datetime
+order by a.datetime asc
