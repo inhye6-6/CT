@@ -167,3 +167,9 @@ where host_id in (
     group by host_id
     having count(host_id)>1)
 order by 1
+
+
+-- 우유(Milk)와 요거트(Yogurt)를 동시에 구입한 장바구니
+SELECT distinct a.cart_id
+from cart_products as a, cart_products as b
+where a.cart_id= b.cart_id and a.name like 'Milk' and b.name like 'Yogurt'
