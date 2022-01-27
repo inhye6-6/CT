@@ -156,6 +156,14 @@ where a.sex_upon_intake like 'Intact%' and (b.sex_upon_outcome like "Spayed%" or
 
 
 
+-- 이름에 el 들어가는 강아지 찾기
+SELECT animal_id, name
+from animal_ins
+where animal_type = 'Dog' and name like '%el%'
+order by 2
+
+
+
 --헤비 유저가 소유한 장소
 
 -- host_id별 카운트해서 2이상인것만 추출 
