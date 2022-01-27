@@ -153,3 +153,17 @@ SELECT a.animal_id, a.animal_type, a.name
 from animal_ins as a left join animal_outs as b
 on a.animal_id = b.animal_id
 where a.sex_upon_intake like 'Intact%' and (b.sex_upon_outcome like "Spayed%" or  b.sex_upon_outcome like "Neutered%")
+
+
+
+--헤비 유저가 소유한 장소
+
+-- host_id별 카운트해서 2이상인것만 추출 
+SELECT id, name, host_id
+from places 
+where host_id in (
+    select host_id
+    from places 
+    group by host_id
+    having count(host_id)>1)
+order by 1
