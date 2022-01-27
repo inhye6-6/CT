@@ -145,3 +145,11 @@ on a.animal_id = b.animal_id
 where b.animal_id is null
 order by 2
 limit 3
+
+
+--보건소에 와서 중성화한 동물
+-- like %,_
+SELECT a.animal_id, a.animal_type, a.name
+from animal_ins as a left join animal_outs as b
+on a.animal_id = b.animal_id
+where a.sex_upon_intake like 'Intact%' and (b.sex_upon_outcome like "Spayed%" or  b.sex_upon_outcome like "Neutered%")
