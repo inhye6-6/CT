@@ -68,3 +68,36 @@ FROM ANIMAL_OUTS AS A
 WHERE hour(A.DATETIME) >= 9 AND hour(A.DATETIME) <= 19
 GROUP BY 1
 ORDER BY 1
+
+
+--입양시각 구하기 (2)
+
+/* 
+1) recursive
+with recursive time as (
+    select 1 as HOUR
+    union all (전체 합치기)
+    select HOUR + 1
+    from time
+    where HOUR < 23
+)
+2) left join
+select HOUR count(animal_id) COUNT
+from time
+left join animal_outs on HOUR = hour(datatime)
+group by 1
+*/
+with recursive time as(
+    select 0 as HOUR
+    union all 
+    select HOUR + 1
+    from time 
+    where HOUR < 23
+)
+
+select HOUR, count(animal_id) COUNT
+from time
+left join animal_outs on HOUR = hour(datetime)
+group by 1 
+order by 1
+
