@@ -133,3 +133,15 @@ from animal_ins as a left join animal_outs as b
 on a.animal_id=b.animal_id
 where a.datetime>b.datetime
 order by a.datetime asc
+
+
+-- 입양가지못한 동물중 가장 오래된 동물 3마리 출력
+-- 입양을 못 간 동물 : outs에 id 없어야함 a-b
+-- 그중에서 datetime이 빠른거 3 (limit n)
+
+SELECT a.name, a.datetime
+from animal_ins as a left join animal_outs as b 
+on a.animal_id = b.animal_id
+where b.animal_id is null
+order by 2
+limit 3
