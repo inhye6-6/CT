@@ -107,3 +107,14 @@ SELECT animal_id
 from animal_ins as a
 where name is null
 order by 1
+
+-- null 처리
+--1) if null(col,처리방법)
+SELECT animal_type, ifnull(name,'No name') name , sex_upon_intake
+from animal_ins
+--2) case when (조건) then (결과) else (결과) end as (별명)
+select animal_type, 
+    case when name is null then 'No name'
+    else name end as name,
+    sex_upon_intake
+from animal_ins
