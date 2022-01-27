@@ -118,3 +118,11 @@ select animal_type,
     else name end as name,
     sex_upon_intake
 from animal_ins
+
+
+-- join
+-- (animal_outs에만 있는 id 구하기)
+SELECT  animal_outs.animal_id, animal_outs.name
+from animal_outs left join animal_ins
+on animal_ins.animal_id = animal_outs.animal_id
+where  animal_ins.animal_id is null
