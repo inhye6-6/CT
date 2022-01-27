@@ -101,3 +101,9 @@ left join animal_outs on HOUR = hour(datetime)
 group by 1 
 order by 1
 
+-- 이름 없는 동물의 아이디
+
+SELECT animal_id 
+from animal_ins as a
+where name is null
+order by 1
