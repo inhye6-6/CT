@@ -181,3 +181,9 @@ order by 1
 SELECT distinct a.cart_id
 from cart_products as a, cart_products as b
 where a.cart_id= b.cart_id and a.name like 'Milk' and b.name like 'Yogurt'
+
+
+--
+SELECT animal_id, name, sex_upon_intake
+from animal_ins
+where name in ('Lucy','Ella','Pickle','Sabirna','Mitty')
