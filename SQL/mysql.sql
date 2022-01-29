@@ -195,3 +195,11 @@ select animal_id , name,
     case when sex_upon_intake like 'Neutered%' or sex_upon_intake like 'Spayed%' then 'O' 
     else 'X' end as 중성화
 from animal_ins
+
+
+-- 보호기간이 오래된 동물 2 (order 시 -로 해줘서 desc) 
+SELECT b.animal_id, b.name 
+from animal_ins as a, animal_outs as b
+where a.animal_id = b.animal_id
+order by (b.datetime - a.datetime) desc
+limit 2
