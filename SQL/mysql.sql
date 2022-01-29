@@ -203,3 +203,8 @@ from animal_ins as a, animal_outs as b
 where a.animal_id = b.animal_id
 order by (b.datetime - a.datetime) desc
 limit 2
+
+
+-- date_format
+SELECT animal_id , name , date_format(datetime, '%Y-%m-%d') as 날짜
+from animal_ins
