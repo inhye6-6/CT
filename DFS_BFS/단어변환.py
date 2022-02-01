@@ -30,3 +30,39 @@ def solution(begin, target, words):
                     queue.append((words[i],count+1))
     
     return bfs()
+
+
+from collections import deque
+def solution(begin, target, words):
+    visited = [0]*(len(words))
+    queue = deque()
+    if target not in words :
+        return 0
+    
+    def bfs():
+        count = 0
+        queue.append((begin,count))
+        
+        while queue:
+            cur,count = queue.popleft()
+            
+            if cur == target:
+                return count
+            
+            for i,word in enumerate(words):
+                cnt = 0
+                if visited[i] == 1:
+                    continue
+                    
+                for a,b in zip(cur,word):
+                    if a != b :
+                        cnt+=1
+                        
+                if cnt == 1 :
+                    visited[i] = 1
+                    queue.append((word,count+1))
+
+        
+        
+    
+    return bfs()
