@@ -60,9 +60,7 @@ def solution(begin, target, words):
                         
                 if cnt == 1 :
                     visited[i] = 1
-                    queue.append((word,count+1))
-
-        
+                    queue.append((word,count+1))     
         
     
     return bfs()
