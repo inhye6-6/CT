@@ -28,3 +28,12 @@ for target in request :
         print('no',end=' ')
     else :
         print('yes',end=' ')
+
+
+# set 사용 ver
+no = set(request)-set(lst)
+for target in request :
+    if target in no :
+        print('no',end=' ')
+    else :
+        print('yes',end=' ')
