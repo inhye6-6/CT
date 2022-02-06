@@ -8,7 +8,7 @@ def solution(m, n, puddles):
                 continue
             if [j,i] in puddles:
                 d[i][j] = 0
-            else: d[i][j] = (d[i-1][j]+d[i][j-1])%100000007
+            else: d[i][j] = (d[i-1][j]+d[i][j-1])%1000000007
 
             
     return d[n][m]
