@@ -12,3 +12,16 @@ def solution(prices):
         v = stack.pop()
         answer[v[0]] = len(prices)-v[0]-1
     return answer
+
+
+
+def solution(prices):
+    answer = [0]*len(prices)
+    for i in range(len(prices)):
+        for j in range(i+1,len(prices)):
+            if prices[i] <= prices[j] :
+                answer[i] +=1
+            else :
+                answer[i] +=1
+                break
+    return answer
