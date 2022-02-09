@@ -208,3 +208,42 @@ limit 2
 -- date_format
 SELECT animal_id , name , date_format(datetime, '%Y-%m-%d') as 날짜
 from animal_ins
+
+
+
+--PostgreSQL
+
+-- write your code in PostgreSQL 9.4
+SELECT a.event_type, (a.value-b.value)
+from(SELECT event_type, value
+from(SELECT event_type, value, rank() over(partition by event_type order by time desc) as 순위, count(*) over(partition by event_type) as count
+from events) as a
+where a.count >=2 and a.순위 = 1) as a,
+(SELECT event_type, value
+from(SELECT event_type, value, rank() over(partition by event_type order by time desc) as 순위, count(*) over(partition by event_type) as count
+from events) as a
+where a.count >=2 and a.순위 = 2) as b
+where b.event_type=a.event_type
+
+
+-- write your code in PostgreSQL 9.4
+-- 차이 반환하는 테이블, union all
+-- coalesce
+SELECT t.team_id, t.team_name , coalesce(result.num_points,0)
+from teams as t left join
+(SELECT distinct r.team_id, sum(r.score) over(partition by r.team_id ) num_points
+from
+(SELECT host_team as team_id,case
+when (host_goals - guest_goals) > 0 then 3 
+when (host_goals - guest_goals) = 0 then 1
+else 0 end as score
+from matches 
+union all
+SELECT guest_team as team_id,case
+when (guest_goals - host_goals) > 0 then 3 
+when (guest_goals - host_goals) = 0 then 1
+else 0 end as score
+from matches ) as r ) as result
+on t.team_id = result.team_id
+order by 3 DESC,1 ASC
+
