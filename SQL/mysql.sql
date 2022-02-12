@@ -331,3 +331,18 @@ with recursive a as(
 
 select repeat('* ',cnt)
 from a
+
+-- prime num // not exists ,num1.num>num2.num
+with recursive a as(
+    select 2 as num
+    union all
+    select num+1
+    from a 
+    where num < 1000)
+
+select group_concat(num1.num separator '&')
+from a as num1
+where not exists (select *
+                 from a as num2
+                 where num1.num%num2.num =0
+                 and num1.num>num2.num)
