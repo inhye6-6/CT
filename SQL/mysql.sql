@@ -259,3 +259,6 @@ from  (select occupation, count(occupation) count
        group by occupation
        order by count)as o)
 order by 1
+
+select count(city)-count(distinct city)
+from station
