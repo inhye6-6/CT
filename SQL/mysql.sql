@@ -260,5 +260,22 @@ from  (select occupation, count(occupation) count
        order by count)as o)
 order by 1
 
+-- 집계함수안에 distinct 가능
 select count(city)-count(distinct city)
 from station
+
+
+-- 한글은 CHAR_LENGTH
+
+(select l.city
+from (select city, length(city) length from station) as l 
+where l.length = (select min(length(city)) from station)
+order by 1
+limit 1)
+union all
+(select l.city 
+from (select city, length(city) length from station) as l 
+where l.length = (select max(length(city)) from station)
+order by 1
+limit 1)
+
