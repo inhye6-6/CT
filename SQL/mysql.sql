@@ -288,3 +288,7 @@ select distinct city
 from station
 where left(city,1) in ("a","e","i","o","u") and right(city,1) in ("a","e","i","o","u") 
 
+select name
+from students
+where marks >75
+order by right(name,3) ,id
