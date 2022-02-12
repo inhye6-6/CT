@@ -309,6 +309,7 @@ select format(sqrt(pow(max(lat_n)-min(lat_n),2)+pow((max(long_w)-min(long_w)),2)
 from station
 
 --중앙값(median)구하기 , set(indexing)
+-- 짝수일때(0,1,2,3) > (3/2) -> 1,2
 set @rowidx=-1; -- ; 꼭해주어야함
 
 select round(avg(l.lat_n),4) as median
@@ -316,3 +317,17 @@ from (select (@rowidx:=@rowidx+1) row_idx , lat_n
      from station
      order by lat_n) as l
 where l.row_idx in (floor(@rowidx/2),ceil(@rowidx/2))
+
+
+-- with 외워쫌,, table이 정해져있지않을 때 좋은듯하당
+-- repeat('',n)
+with recursive a as(
+    select 20 as cnt 
+    union all
+    select cnt-1
+    from a
+    where cnt >0
+)
+
+select repeat('* ',cnt)
+from a
