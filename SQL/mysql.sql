@@ -247,3 +247,15 @@ from matches ) as r ) as result
 on t.team_id = result.team_id
 order by 3 DESC,1 ASC
 
+
+
+-- concat, left,right, lower, order by
+(select concat(name,'(',left(occupation,1),')') 
+from OCCUPATIONs)
+union
+(select concat('There are a total of ',o.count, ' ',lower(o.occupation),'s.')
+from  (select occupation, count(occupation) count 
+       from OCCUPATIONs
+       group by occupation
+       order by count)as o)
+order by 1
