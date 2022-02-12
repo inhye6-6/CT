@@ -302,3 +302,8 @@ from station
 -- abs
 select round(abs(min(lat_n)-max(lat_n))+abs(min(long_w)-max(long_w)),4)
 from station
+
+
+-- format, pow(num,n) => num의 n승
+select format(sqrt(pow(max(lat_n)-min(lat_n),2)+pow((max(long_w)-min(long_w)),2)),4)
+from station
