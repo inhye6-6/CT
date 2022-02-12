@@ -292,3 +292,7 @@ select name
 from students
 where marks >75
 order by right(name,3) ,id
+
+-- ceiling, trucate, round
+select round(sum(lat_n),2) lat,  round(sum(long_w),2) lon
+from station
