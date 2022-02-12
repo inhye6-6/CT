@@ -295,7 +295,7 @@ from students
 where marks >75
 order by right(name,3) ,id
 
--- ceiling, trucate, round
+-- ceil, trucate, round
 select round(sum(lat_n),2) lat,  round(sum(long_w),2) lon
 from station
 
@@ -307,3 +307,12 @@ from station
 -- format, pow(num,n) => num의 n승
 select format(sqrt(pow(max(lat_n)-min(lat_n),2)+pow((max(long_w)-min(long_w)),2)),4)
 from station
+
+--중앙값(median)구하기 , set(indexing)
+set @rowidx=-1; -- ; 꼭해주어야함
+
+select round(avg(l.lat_n),4) as median
+from (select (@rowidx:=@rowidx+1) row_idx , lat_n
+     from station
+     order by lat_n) as l
+where l.row_idx in (floor(@rowidx/2),ceil(@rowidx/2))
