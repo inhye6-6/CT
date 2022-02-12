@@ -346,3 +346,14 @@ where not exists (select *
                  from a as num2
                  where num1.num%num2.num =0
                  and num1.num>num2.num)
+
+
+-- set, where 절 case when
+set @xidx=1 , @yidx=1  ;
+
+select fx.x, fx.y
+from (select (@xidx:=@xidx+1) idx , x,y
+     from functions) as fx,(select (@yidx:=@yidx+1) idx,x,y
+     from functions) as fy
+where fx.x = fy.y and fx.y=fy.x and (case when (fx.x < fx.y) then fx.idx <> fy.idx when (fx.x = fx.y) then fx.idx < fy.idx end )
+order by 1
