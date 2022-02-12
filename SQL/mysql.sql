@@ -279,15 +279,17 @@ where l.length = (select max(length(city)) from station)
 order by 1
 limit 1)
 
+--
 select distinct city
 from station
 where city like "a%" or  city like "e%" or  city like "i%" or  city like "o%" or  city like "u%" 
 
-
+--
 select distinct city
 from station
 where left(city,1) in ("a","e","i","o","u") and right(city,1) in ("a","e","i","o","u") 
 
+--
 select name
 from students
 where marks >75
@@ -295,4 +297,8 @@ order by right(name,3) ,id
 
 -- ceiling, trucate, round
 select round(sum(lat_n),2) lat,  round(sum(long_w),2) lon
+from station
+
+-- abs
+select round(abs(min(lat_n)-max(lat_n))+abs(min(long_w)-max(long_w)),4)
 from station
