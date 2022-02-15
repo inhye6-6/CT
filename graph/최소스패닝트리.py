@@ -1,29 +1,31 @@
 import sys
+from tkinter import W
 input = sys.stdin.readline
-from collections import deque
 
 v,e = map(int,input().split())
-graph = [[0]*e for _ in range(v)]
+graph = [[]*e for _ in range(v)]
 visited = [0]*v
-
+min_weight=0
 for _ in range(v) :
     a, b ,c = map(int,input().split())
     graph[a-1].append((b-1,c))
-    graph[a-1].sort(key= lambda x :x[1])
+    graph[a-1].sort(key= lambda x : x[1])
 
-queue=deque()
-queue.append(graph[0][0])
 
-def bfs():
-    min_weight=0
-    n = 0
-    while queue: 
-        j,w = queue.popleft()
+n=0
+def dfs(i):
+    global n
+    global min_weight
+    while True: 
         if n == v-1:
             return min_weight
-        if visited[j] == 0:
-            min_weight += w
-            visited[j]=1
-            queue.append(graph[j][0])
 
-print(bfs())    
+        if graph[i] :    
+            min_weight += graph[i][0][1]
+            n+=1
+            dfs(graph[i].pop(0)[0])
+
+print(dfs(0))    
+
+
+
