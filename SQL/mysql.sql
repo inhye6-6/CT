@@ -357,3 +357,18 @@ from (select (@xidx:=@xidx+1) idx , x,y
      from functions) as fy
 where fx.x = fy.y and fx.y=fy.x and (case when (fx.x < fx.y) then fx.idx <> fy.idx when (fx.x = fx.y) then fx.idx < fy.idx end )
 order by 1
+
+
+set @xidx = 1, @yidx =1 ;
+
+select p1.x,p1.y
+from (select (@xidx:=@xidx+1) idx , x, y 
+      from functions) as p1, 
+    (select (@yidx:=@yidx+1) idx , x, y 
+     from functions) as p2
+where p1.x=p2.y and p1.y=p2.x and p1.x <= p1.y and
+(case when (p1.x < p1.y) then p1.idx <> p2.idx when (p1.x=p2.y) then p1.idx < p2.idx end)
+order by 1
+
+
+-- sql 마지막 문제 생각해보기
