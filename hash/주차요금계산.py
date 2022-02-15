@@ -26,3 +26,4 @@ def solution(fees, records):
             answer.append([int(k),fees[1]+ ceil((time - fees[0])/fees[2])* fees[3]])
             
     return [x[1] for x in sorted(answer)]
+    
