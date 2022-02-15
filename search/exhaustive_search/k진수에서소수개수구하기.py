@@ -25,3 +25,5 @@ def solution(n, k):
             count +=1
     
     return count
+
+    
