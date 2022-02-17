@@ -423,3 +423,14 @@ from employee
 group by earnings
 order by 1 desc
 limit 1
+
+-- datediff
+select s.start_date, min(e.end_date)
+from 
+(select start_date from projects where start_date not in (
+    select end_date from projects)) as s,
+(select end_date from projects where end_date not in (
+    select start_date from projects)) as e
+where s.start_date < e.end_date
+group by s.start_date
+order by datediff(min(e.end_date),s.start_date) , s.start_date
