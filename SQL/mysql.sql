@@ -406,3 +406,9 @@ join manager m on (s.senior_manager_code = m.senior_manager_code)
 join employee e on (m.manager_code = e.manager_code)
 group by c.company_code, c.founder
 order by c.company_code
+
+
+-- cast( 변수 as 변경하고싶은거) , replace
+
+select ceil(avg(salary)- avg(cast(replace(cast(salary as char),'0','') as signed)))
+from employees
