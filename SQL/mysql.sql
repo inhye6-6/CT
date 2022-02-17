@@ -434,3 +434,16 @@ from
 where s.start_date < e.end_date
 group by s.start_date
 order by datediff(min(e.end_date),s.start_date) , s.start_date
+
+
+-- 
+select  students.name
+from(select f.id, p.salary
+    from friends f,packages p
+    where f.id = p.id) as f1,
+    (select f.id, f.friend_id, p.salary
+    from friends f,packages p
+    where f.friend_id = p.id) as f2,
+    students
+where f1.id = f2.id and f1.salary < f2.salary and f1.id = students.id
+order by f2.salary
