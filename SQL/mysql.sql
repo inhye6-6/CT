@@ -377,3 +377,13 @@ when (a + b <= c) or (a + c <= b) or (c + b <= a)  then "Not A Triangle"
 when a <> b and b <> c and a <> c then "Scalene" 
 else "Isosceles" end 
 from triangles
+
+--occutations
+select 
+min(case when a.occupation = 'Doctor' then a.name else NULL end),
+min(case when a.occupation = 'Professor' then a.name else NULL end),
+min(case when  a.occupation = 'Singer' then a.name else NULL end),
+min(case when a.occupation = 'Actor' then a.name else NULL end)
+from (select row_number() over(partition by occupation order by name) idx ,occupation, name
+from occupations) as a
+group by a.idx
