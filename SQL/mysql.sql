@@ -387,3 +387,10 @@ min(case when a.occupation = 'Actor' then a.name else NULL end)
 from (select row_number() over(partition by occupation order by name) idx ,occupation, name
 from occupations) as a
 group by a.idx
+
+-- select문에서 서브 select
+select a.N, 
+case when P is null then "Root"
+when a.N in (select distinct P from BST) then "Inner" else "Leaf" end
+from BST a 
+order by a.N
