@@ -371,4 +371,9 @@ where p1.x=p2.y and p1.y=p2.x and p1.x <= p1.y and
 order by 1
 
 
--- sql 마지막 문제 생각해보기
+-- triangle
+select case when a = b and a = c then "Equilateral" 
+when (a + b <= c) or (a + c <= b) or (c + b <= a)  then "Not A Triangle" 
+when a <> b and b <> c and a <> c then "Scalene" 
+else "Isosceles" end 
+from triangles
