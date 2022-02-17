@@ -409,6 +409,17 @@ order by c.company_code
 
 
 -- cast( 변수 as 변경하고싶은거) , replace
-
+ -- signed (양수음수 둘다 ok) , unsigned(양수만) , char, datetime, time . integer, decimal
 select ceil(avg(salary)- avg(cast(replace(cast(salary as char),'0','') as signed)))
 from employees
+-- conver(변수,변경하고싶은거)
+select ceil(avg(salary)- avg(convert(replace(convert(salary, char),'0',''), signed)))
+from employees
+
+
+-- gruopby 다음 select인데 이게 되넹 ㅎㅎ...
+select (months*salary) earnings, count(*) 
+from employee
+group by earnings
+order by 1 desc
+limit 1
