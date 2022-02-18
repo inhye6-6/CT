@@ -480,3 +480,13 @@ SELECT SUBMISSION_DATE,
 FROM
 (SELECT DISTINCT SUBMISSION_DATE FROM SUBMISSIONS) S1
 GROUP BY SUBMISSION_DATE
+
+
+-- join
+select h.hacker_id , h.name
+from Hackers h, Submissions s, Challenges c,  Difficulty d
+where s.challenge_id = c.challenge_id and c.difficulty_level = d.difficulty_level
+and d.score = s.score and s.hacker_id = h.hacker_id
+group by h.hacker_id,h.name
+having count(s.hacker_id) >1
+order by count(s.hacker_id) desc, s.hacker_id
