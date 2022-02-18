@@ -530,3 +530,8 @@ from (select hacker_id, max(score) score
 group by h.hacker_id, h.name
 having total > 0
 order by 3 desc, 1
+
+-- floor
+select country.continent, floor(avg(city.population))
+from city join country on city.countrycode = country.code
+group by country.continent
