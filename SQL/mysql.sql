@@ -491,6 +491,13 @@ group by h.hacker_id,h.name
 having count(s.hacker_id) >1
 order by count(s.hacker_id) desc, s.hacker_id
 
+select  h.hacker_id,h.name
+from submissions s join challenges c on s.challenge_id = c.challenge_id , difficulty d , hackers h
+where c.difficulty_level = d.difficulty_level and s.score = d.score and s.hacker_id = h.hacker_id
+group by h.hacker_id,h.name
+having count(*) > 1
+order by count(*) desc ,1
+
 
 --Ollivander's Inventory 
 select w.id, p.age, w.coins_needed, w.power
