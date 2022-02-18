@@ -500,3 +500,33 @@ from  Wands_Property pp join Wands ww on pp.code = ww.code
 where pp.is_evil = 0 and ww.power = w.power and pp.age = p.age
 )
 order by 4 desc, 2 desc
+
+
+-- challenges
+
+select h.hacker_id,h.name, count(*) ans
+from Challenges c join Hackers h on c.hacker_id = h.hacker_id
+group by h.hacker_id , h.name
+having ans in (select sub.created 
+                from (select hacker_id, count(*) created
+                    from Challenges 
+                    group by hacker_id) sub
+                group by sub.created
+                having count(*)=1)
+    or ans = (select max(sub2.created)
+                from (select count(*) created
+                    from Challenges 
+                group by hacker_id) sub2)
+order by 3 desc, 1
+
+
+
+-- contest leaderboard
+
+select h.hacker_id, h.name, sum(s.score) total
+from (select hacker_id, max(score) score
+     from submissions
+     group by hacker_id,challenge_id) s join hackers h on h.hacker_id = s.hacker_id
+group by h.hacker_id, h.name
+having total > 0
+order by 3 desc, 1
