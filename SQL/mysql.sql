@@ -535,3 +535,9 @@ order by 3 desc, 1
 select country.continent, floor(avg(city.population))
 from city join country on city.countrycode = country.code
 group by country.continent
+
+-- casewhen
+select case when g.grade < 8 then "NULL" else s.name end name, g.grade, s.marks
+from students s , grades g
+where s.marks between g.min_mark and g.max_mark
+order by 2 desc, 1 , 3 
