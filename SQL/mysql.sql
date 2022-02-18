@@ -447,3 +447,15 @@ from(select f.id, p.salary
     students
 where f1.id = f2.id and f1.salary < f2.salary and f1.id = students.id
 order by f2.salary
+
+-- join, left join
+-- 얘네가 하이라키 형식이긴 한데 두개는 다른 테이블이라 놓치는게 있을 거라 left join인듯 함!
+select contests.contest_id, contests.hacker_id, contests.name, sum(s.total_submissions), sum(s.total_accepted_submissions), sum(v.total_views), sum(v.total_unique_views)
+from contests 
+join colleges on contests.contest_id = colleges.contest_id 
+join challenges c on c.college_id = colleges.college_id
+left join (select challenge_id, sum(total_submissions) total_submissions, sum(total_accepted_submissions) total_accepted_submissions from Submission_Stats group by challenge_id) s on c.challenge_id = s.challenge_id
+left join (select challenge_id, sum(total_views) total_views, sum(total_unique_views) total_unique_views from View_Stats group by challenge_id) v on c.challenge_id = v.challenge_id
+group by contests.contest_id, contests.hacker_id, contests.name
+having sum(s.total_submissions) != 0 or sum(s.total_accepted_submissions) != 0 or sum(v.total_views) != 0 or sum(v.total_unique_views) != 0
+order by contests.contest_id
