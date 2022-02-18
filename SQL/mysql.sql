@@ -490,3 +490,13 @@ and d.score = s.score and s.hacker_id = h.hacker_id
 group by h.hacker_id,h.name
 having count(s.hacker_id) >1
 order by count(s.hacker_id) desc, s.hacker_id
+
+
+--Ollivander's Inventory 
+select w.id, p.age, w.coins_needed, w.power
+from Wands_Property p join Wands w on p.code = w.code 
+where w.coins_needed = (select min(ww.coins_needed)
+from  Wands_Property pp join Wands ww on pp.code = ww.code 
+where pp.is_evil = 0 and ww.power = w.power and pp.age = p.age
+)
+order by 4 desc, 2 desc
