@@ -459,3 +459,24 @@ left join (select challenge_id, sum(total_views) total_views, sum(total_unique_v
 group by contests.contest_id, contests.hacker_id, contests.name
 having sum(s.total_submissions) != 0 or sum(s.total_accepted_submissions) != 0 or sum(v.total_views) != 0 or sum(v.total_unique_views) != 0
 order by contests.contest_id
+
+
+-- ;;
+SELECT SUBMISSION_DATE,
+(SELECT COUNT(DISTINCT HACKER_ID)  
+ FROM SUBMISSIONS S2  
+ WHERE S2.SUBMISSION_DATE = S1.SUBMISSION_DATE AND    
+(SELECT COUNT(DISTINCT S3.SUBMISSION_DATE) 
+ FROM SUBMISSIONS S3 WHERE S3.HACKER_ID = S2.HACKER_ID AND S3.SUBMISSION_DATE < S1.SUBMISSION_DATE) = DATEDIFF(S1.SUBMISSION_DATE , '2016-03-01')),
+(select hacker_id
+ from SUBMISSIONS s
+ where s.submission_date = S1.SUBMISSION_DATE 
+ group by hacker_id
+ order by count(hacker_id) desc , hacker_id
+ limit 1
+ ) id,
+ (select name from hackers where hackers.hacker_id = id)
+ 
+FROM
+(SELECT DISTINCT SUBMISSION_DATE FROM SUBMISSIONS) S1
+GROUP BY SUBMISSION_DATE
